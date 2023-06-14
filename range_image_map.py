@@ -46,6 +46,9 @@ def point_cloud_2_birdseye(points,
     x_img -= int(np.floor(side_range[0] / res))
     y_img += int(np.ceil(fwd_range[1] / res))
 
+    x_img -= 1
+    y_img -= 1
+
     # Clipping values according to the height range specified
     pixel_values = np.clip(a=z_points,
                            a_min=height_range[0],

@@ -187,27 +187,6 @@ def load_calib(calib_path):
 	return np.array(T_cam_velo)
 
 
-def load_poses(pose_path):
-
-	# Read and parse the poses
-	poses = []
-	try:
-		if '.txt' in pose_path:
-			with open(pose_path, 'r') as f:
-				lines = f.readlines()
-				for line in lines:
-					T_w_cam0 = np.fromstring(line, dtype=float, sep=' ')
-					T_w_cam0 = T_w_cam0.reshape(3, 4)
-					T_w_cam0 = np.vstack((T_w_cam0, [0, 0, 0, 1]))
-					poses.append(T_w_cam0)
-		else:
-			poses = np.load(pose_path)['arr_0']
-	except FileNotFoundError:
-		print('Ground truth poses are not avaialble.')
-
-	return np.array(poses)
-
-
 def custom_draw_geometry_with_key_callback(pcd):
 
     def change_background_to_black(vis):
